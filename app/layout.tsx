@@ -4,12 +4,13 @@ import { Inter } from 'next/font/google';
 import { ThemeProvider } from "@/components/theme-provider"
 import Header from '@/components/header';
 import Footer from '@/components/footer';
+import { Toaster } from "@/components/ui/toaster";
 
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: 'AI Consultancy - Leveraging Generative AI for Business Growth',
-  description: 'Expert AI consulting services to help businesses implement Generative AI and LLMs for growth and innovation.',
+  title: 'Predictics Inc. - Enterprise AI & Data Consulting',
+  description: 'Leading AI and data consulting firm helping Fortune 500 companies and large enterprises transform their business with advanced analytics, machine learning, and data solutions.',
 };
 
 export default function RootLayout({
@@ -24,6 +25,7 @@ export default function RootLayout({
           <Header />
           <main>{children}</main>
           <Footer />
+          <Toaster />
         </ThemeProvider>
       </body>
     </html>

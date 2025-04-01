@@ -1,87 +1,232 @@
 "use client"
 
-import { useState } from 'react';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
-import * as z from 'zod';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Textarea } from '@/components/ui/textarea';
-import { toast } from '@/components/ui/use-toast';
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useForm } from "react-hook-form"
+import { z } from "zod"
+import { useToast } from "@/hooks/use-toast"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Building2, Mail, Phone, Clock, ArrowRight } from "lucide-react"
 
 const formSchema = z.object({
-  name: z.string().min(2, { message: 'Name must be at least 2 characters.' }),
-  email: z.string().email({ message: 'Please enter a valid email address.' }),
-  company: z.string().min(2, { message: 'Company name must be at least 2 characters.' }),
-  message: z.string().min(10, { message: 'Message must be at least 10 characters.' }),
-});
+  name: z.string().min(2, {
+    message: "Name must be at least 2 characters.",
+  }),
+  email: z.string().email({
+    message: "Please enter a valid email address.",
+  }),
+  company: z.string().min(2, {
+    message: "Company name must be at least 2 characters.",
+  }),
+  message: z.string().min(10, {
+    message: "Message must be at least 10 characters.",
+  }),
+})
 
-export default function Contact() {
-  const [isSubmitting, setIsSubmitting] = useState(false);
+type FormData = z.infer<typeof formSchema>;
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
+export default function ContactPage() {
+  const { toast } = useToast()
+
+  const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
-  });
+    defaultValues: {
+      name: "",
+      email: "",
+      company: "",
+      message: "",
+    },
+  })
 
-  const onSubmit = async (data) => {
-    setIsSubmitting(true);
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1000));
-    setIsSubmitting(false);
-    toast({
-      title: "Message Sent",
-      description: "We've received your message and will get back to you soon.",
-    });
-    reset();
-  };
+  async function onSubmit(data: FormData) {
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
+
+      if (response.ok) {
+        toast({
+          title: "Message Sent",
+          description: "Thank you for your inquiry. We'll be in touch shortly!",
+        })
+        form.reset();
+      } else {
+        throw new Error('Failed to send message');
+      }
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "There was a problem sending your message. Please try again.",
+        variant: "destructive",
+      })
+    }
+  }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">Contact Us</h1>
+    <div className="container mx-auto px-4 py-12">
+      <h1 className="text-4xl font-bold text-center mb-12">Contact Us</h1>
       
-      <div className="max-w-2xl mx-auto">
-        <p className="text-lg text-center mb-8">
-          Ready to transform your business with AI? Get in touch with us today, and let's discuss 
-          how we can help you leverage the power of Generative AI and LLMs.
-        </p>
-
-        <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-          <div>
-            <label htmlFor="name" className="block text-sm font-medium mb-1">Name</label>
-            <Input id="name" {...register('name')} />
-            {errors.name && <p className="text-sm text-red-500 mt-1">{errors.name.message}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="email" className="block text-sm font-medium mb-1">Email</label>
-            <Input id="email" type="email" {...register('email')} />
-            {errors.email && <p className="text-sm text-red-500 mt-1">{errors.email.message}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="company" className="block text-sm font-medium mb-1">Company</label>
-            <Input id="company" {...register('company')} />
-            {errors.company && <p className="text-sm text-red-500 mt-1">{errors.company.message}</p>}
-          </div>
-
-          <div>
-            <label htmlFor="message" className="block text-sm font-medium mb-1">Message</label>
-            <Textarea id="message" {...register('message')} />
-            {errors.message && <p className="text-sm text-red-500 mt-1">{errors.message.message}</p>}
-          </div>
-
-          <Button type="submit" className="w-full" disabled={isSubmitting}>
-            {isSubmitting ? 'Sending...' : 'Send Message'}
-          </Button>
-        </form>
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-12">
+        <Card className="lg:col-span-2">
+          <CardHeader>
+            <CardTitle>Get in Touch</CardTitle>
+            <CardDescription>
+              Fill out the form below to discuss how Predictics Inc. can help your organization harness the power of data and AI.
+            </CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <FormField
+                    control={form.control}
+                    name="name"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Full Name</FormLabel>
+                        <FormControl>
+                          <Input placeholder="John Smith" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                  <FormField
+                    control={form.control}
+                    name="email"
+                    render={({ field }) => (
+                      <FormItem>
+                        <FormLabel>Email</FormLabel>
+                        <FormControl>
+                          <Input placeholder="john.smith@example.com" {...field} />
+                        </FormControl>
+                        <FormMessage />
+                      </FormItem>
+                    )}
+                  />
+                </div>
+                <FormField
+                  control={form.control}
+                  name="company"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>Company Name</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Company Inc." {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="message"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel>How Can We Help?</FormLabel>
+                      <FormControl>
+                        <Textarea 
+                          placeholder="Tell us about your data and AI needs..." 
+                          className="min-h-[120px]" 
+                          {...field} 
+                        />
+                      </FormControl>
+                      <FormDescription>
+                        Please provide details about your project, goals, or any specific requirements.
+                      </FormDescription>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full md:w-auto">
+                  Submit Inquiry <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </form>
+            </Form>
+          </CardContent>
+        </Card>
+        
+        <div className="space-y-6">
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Mail className="mr-2 h-5 w-5" /> Email
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                <a href="mailto:getintouch@predictincinc.com" className="text-primary hover:underline">
+                  getintouch@predictincinc.com
+                </a>
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                For general inquiries and information
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Building2 className="mr-2 h-5 w-5" /> Headquarters
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                123 Enterprise Drive<br />
+                Suite 500<br />
+                San Francisco, CA 94105
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Phone className="mr-2 h-5 w-5" /> Phone
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                <a href="tel:+18881234567" className="text-primary hover:underline">
+                  +1 (888) 123-4567
+                </a>
+              </p>
+              <p className="text-sm text-muted-foreground mt-2">
+                Monday-Friday, 9am-6pm PT
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center">
+                <Clock className="mr-2 h-5 w-5" /> Response Time
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm">
+                We aim to respond to all inquiries within 24 business hours.
+              </p>
+            </CardContent>
+          </Card>
+        </div>
       </div>
-
-      <div className="mt-12 text-center">
-        <h2 className="text-2xl font-semibold mb-4">Other Ways to Reach Us</h2>
-        <p className="mb-2">Email: info@aiconsultancy.com</p>
-        <p className="mb-2">Phone: +1 (555) 123-4567</p>
-        <p>Address: 123 AI Street, Tech City, TC 12345</p>
+      
+      <div className="bg-muted p-8 rounded-lg text-center mb-8">
+        <h2 className="text-2xl font-bold mb-4">Ready to transform your data strategy?</h2>
+        <p className="max-w-2xl mx-auto mb-4">
+          Our team of enterprise data and AI experts is ready to help your organization unlock the full potential of your data assets. 
+          Schedule a consultation today to discuss your specific needs and how Predictics Inc. can deliver custom solutions tailored to your objectives.
+        </p>
       </div>
     </div>
-  );
+  )
 }

@@ -20,12 +20,12 @@ const Footer = () => {
           </div>
           <div>
             <h3 className="text-lg font-semibold mb-4">Contact</h3>
-            <p className="text-muted-foreground">Email: info@aiconsultancy.com</p>
-            <p className="text-muted-foreground">Phone: +1 (555) 123-4567</p>
+            <p className="text-muted-foreground">Email: getintouch@predictincinc.com</p>
+            <p className="text-muted-foreground">Phone: +1 (888) 123-4567</p>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t text-center text-muted-foreground">
-          <p>&copy; 2023 AI Consultancy. All rights reserved.</p>
+          <p>&copy; 2020 Predictics Inc. All rights reserved.</p>
         </div>
       </div>
     </footer>

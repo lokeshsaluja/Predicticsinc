@@ -31,20 +31,20 @@ const config: Config = {
           foreground: 'hsl(var(--popover-foreground))',
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: 'hsl(263.4 100% 64%)',  // Vibrant purple
+          foreground: 'hsl(0 0% 100%)',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: 'hsl(210 100% 50%)',    // Bright blue
+          foreground: 'hsl(0 0% 100%)',
+        },
+        accent: {
+          DEFAULT: 'hsl(334 100% 68%)',    // Pink accent
+          foreground: 'hsl(0 0% 100%)',
         },
         muted: {
           DEFAULT: 'hsl(var(--muted))',
           foreground: 'hsl(var(--muted-foreground))',
-        },
-        accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
