@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { insertContactForm, DbResult, testDatabaseConnection } from '@/lib/db';
 import { saveContactToFile, ensureDataDirectoryExists } from '@/lib/file-storage';
+import { saveContactToKV, StorageResult } from '@/lib/kv-storage';
 
 // This is crucial - it tells Next.js this route must be dynamically rendered
 export const dynamic = 'force-dynamic';
@@ -53,6 +54,29 @@ export async function POST(request: Request) {
     
     console.log('Processing contact data:', contactData);
     
+    // If we're on Vercel, try using KV storage first
+    if (isVercelEnvironment) {
+      try {
+        console.log('Attempting to use Vercel KV storage');
+        const kvResult = await saveContactToKV(contactData);
+        
+        if (kvResult.success) {
+          console.log('KV storage successful:', kvResult);
+          return NextResponse.json({ 
+            success: true, 
+            message: 'Contact form submitted successfully',
+            id: kvResult.id,
+            storage: 'kv'
+          });
+        } else {
+          console.log('KV storage failed, will try database next');
+        }
+      } catch (kvError) {
+        console.error('KV error occurred:', kvError);
+        // Continue to database attempt
+      }
+    }
+    
     // Test database connection first
     try {
       const dbConnected = await testDatabaseConnection();
@@ -61,7 +85,7 @@ export async function POST(request: Request) {
       console.error('Database connection test error:', connError);
     }
     
-    // Try database first, with proper error handling
+    // Try database next
     let dbSuccess = false;
     let dbResult: DbResult | null = null;
     
@@ -83,28 +107,27 @@ export async function POST(request: Request) {
       }
     } catch (dbError) {
       console.error('Database error occurred:', dbError);
-      // Continue to file fallback
+      // Continue to file fallback (only in development)
     }
     
-    // In Vercel production, if database fails, don't try file storage as it won't work
+    // In Vercel production, don't try file storage as it won't work
     if (isVercelEnvironment && isProduction) {
-      console.log('Running in Vercel production - skipping file storage fallback');
+      console.log('Running in Vercel production with no working storage options');
       return NextResponse.json(
         { 
           success: false, 
-          message: 'Unable to process your submission. Please try again later.',
-          error: 'Database connection failed in production environment',
+          message: 'Unable to process your submission. Please try again later or contact us directly.',
+          error: 'Storage systems unavailable',
           env: {
             vercel: true,
-            production: true,
-            postgres_url_exists: !!process.env.POSTGRES_URL
+            production: true
           }
         },
         { status: 500 }
       );
     }
     
-    // File storage fallback - guaranteed to run if database failed
+    // File storage fallback - only for local development
     console.log('Attempting file storage fallback');
     
     // Ensure directory exists before trying to save
@@ -124,14 +147,14 @@ export async function POST(request: Request) {
       } else {
         console.error('File storage failed:', fileResult.error);
         return NextResponse.json(
-          { success: false, message: 'Failed to save data to file' },
+          { success: false, message: 'Failed to save submission - all storage methods failed' },
           { status: 500 }
         );
       }
     } catch (fileError) {
       console.error('File storage error:', fileError);
       return NextResponse.json(
-        { success: false, message: 'Error saving submission to file' },
+        { success: false, message: 'All storage methods failed' },
         { status: 500 }
       );
     }
