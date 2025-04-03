@@ -1,7 +1,4 @@
 {
-  "buildEnvironment": {
-    "NEXT_PUBLIC_ENABLE_JSON_API": "true"
-  },
   "env": {
     "NEXT_PUBLIC_ENABLE_JSON_API": "true"
   }
