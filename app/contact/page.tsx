@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useRef } from "react"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useForm } from "react-hook-form"
 import { z } from "zod"
@@ -13,6 +13,8 @@ import { Textarea } from "@/components/ui/textarea"
 import { Building2, Mail, Phone, Clock, ArrowRight, Globe, MapPin, CalendarClock, Users, CheckCircle, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import ProfessionalImage from "@/components/ui/professional-image"
+import ReCAPTCHA from "react-google-recaptcha"
+import { RECAPTCHA_SITE_KEY } from "@/lib/recaptcha-config"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -29,6 +31,9 @@ const formSchema = z.object({
   message: z.string().min(10, {
     message: "Message must be at least 10 characters.",
   }),
+  recaptchaToken: z.string().min(1, {
+    message: "Please complete the CAPTCHA verification.",
+  }),
 })
 
 type ContactFormData = z.infer<typeof formSchema>;
@@ -38,6 +43,7 @@ export const dynamic = 'force-dynamic';
 export default function ContactPage() {
   const { toast } = useToast()
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const recaptchaRef = useRef<ReCAPTCHA>(null)
 
   const form = useForm<ContactFormData>({
     resolver: zodResolver(formSchema),
@@ -48,8 +54,13 @@ export default function ContactPage() {
       industry: "",
       service: "",
       message: "",
+      recaptchaToken: "",
     },
   })
+
+  const handleRecaptchaChange = (token: string | null) => {
+    form.setValue('recaptchaToken', token || '');
+  }
 
   async function onSubmit(data: ContactFormData) {
     if (isSubmitting) return;
@@ -65,7 +76,8 @@ export default function ContactPage() {
         company: data.company.trim(),
         industry: data.industry || '',
         service: data.service || '',
-        message: data.message.trim()
+        message: data.message.trim(),
+        recaptchaToken: data.recaptchaToken
       };
       
       console.log('Sending request to API');
@@ -125,6 +137,8 @@ export default function ContactPage() {
           description: "Thank you for your inquiry. We'll be in touch shortly!",
         });
         form.reset();
+        // Reset the reCAPTCHA
+        recaptchaRef.current?.reset();
       } else {
         console.error('Server returned error:', result);
         throw new Error(result?.message || 'Unknown error occurred');
@@ -315,6 +329,30 @@ export default function ContactPage() {
                     </FormItem>
                   )}
                 />
+                
+                {/* reCAPTCHA */}
+                <FormField
+                  control={form.control}
+                  name="recaptchaToken"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <div className="flex justify-center sm:justify-start">
+                          <ReCAPTCHA
+                            ref={recaptchaRef}
+                            sitekey={RECAPTCHA_SITE_KEY}
+                            onChange={(token) => {
+                              handleRecaptchaChange(token);
+                              field.onChange(token || '');
+                            }}
+                          />
+                        </div>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                
                 <Button type="submit" className="w-full md:w-auto" size="lg" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <>

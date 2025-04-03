@@ -16,14 +16,37 @@ To securely set up your contact form email functionality on Vercel, follow these
    | `EMAIL_PASSWORD` | yxmh thly xuqj swks | Production, Preview, Development |
    | `ENABLE_EMAIL_SENDING` | true | Production, Preview, Development |
    | `ALWAYS_SEND_EMAIL` | true | Production, Preview, Development |
+   | `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` | Your reCAPTCHA site key | Production, Preview, Development |
+   | `RECAPTCHA_SECRET_KEY` | Your reCAPTCHA secret key | Production, Preview, Development |
 
 4. **Click "Save"** to apply these environment variables.
+
+## Setting up Google reCAPTCHA
+
+To protect your contact form from spam and bot submissions, we've added Google reCAPTCHA. To set it up:
+
+1. **Register your site on Google reCAPTCHA**:
+   - Visit [Google reCAPTCHA Admin Console](https://www.google.com/recaptcha/admin)
+   - Sign in with your Google account
+   - Register a new site:
+     - Enter "Predictics Inc Website" as the label
+     - Select "reCAPTCHA v2" (with "I'm not a robot" checkbox)
+     - Add both your Vercel domain and localhost to the domains list
+     - Accept the terms and submit
+
+2. **Get your keys**:
+   - After registration, you'll receive a **Site Key** and a **Secret Key**
+   - Add these to your Vercel environment variables as shown above
+   - Also add them to your local `.env.local` file
+
+3. **Test the implementation** both locally and after deployment to ensure reCAPTCHA is working properly.
 
 ## Security Considerations
 
 - **Environment variables** in Vercel are encrypted at rest and in transit.
 - They are **not exposed to the client-side code** unless you explicitly prefix them with `NEXT_PUBLIC_`.
-- None of our email variables use this prefix, so they remain secure on the server.
+- Only the reCAPTCHA site key is prefixed with `NEXT_PUBLIC_` as it needs to be accessible to the frontend.
+- The reCAPTCHA secret key and email credentials remain secure on the server.
 - The app password can be **revoked at any time** in your Google Account if needed.
 
 ## Verifying the Setup

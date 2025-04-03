@@ -3,6 +3,7 @@ import { insertContactForm, testDatabaseConnection } from '@/lib/db';
 import { saveContactToFile, ensureDataDirectoryExists } from '@/lib/file-storage';
 import { saveContactToKV } from '@/lib/kv-storage';
 import { sendContactFormEmail } from '@/lib/email-service';
+import { verifyRecaptchaToken } from '@/lib/recaptcha-config';
 
 // This is crucial - it tells Next.js this route must be dynamically rendered
 export const dynamic = 'force-dynamic';
@@ -34,11 +35,22 @@ export async function POST(request: Request) {
     if (!data.email) missingFields.push('email');
     if (!data.company) missingFields.push('company');
     if (!data.message) missingFields.push('message');
+    if (!data.recaptchaToken) missingFields.push('recaptchaToken');
     
     if (missingFields.length > 0) {
       console.error(`Missing required fields: ${missingFields.join(', ')}`);
       return NextResponse.json(
         { success: false, message: `Missing required fields: ${missingFields.join(', ')}` },
+        { status: 400 }
+      );
+    }
+    
+    // Verify reCAPTCHA token
+    const recaptchaValid = await verifyRecaptchaToken(data.recaptchaToken);
+    if (!recaptchaValid) {
+      console.error('reCAPTCHA verification failed');
+      return NextResponse.json(
+        { success: false, message: 'reCAPTCHA verification failed. Please try again.' },
         { status: 400 }
       );
     }
