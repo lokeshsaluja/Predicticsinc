@@ -1,157 +1,184 @@
-import Image from 'next/image';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
+"use client"
 
-export default function About() {
+import React from 'react';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { ArrowRight, ArrowUpRight, Users, Compass, Award, BookOpen, Target, Clock, Database } from 'lucide-react';
+import Link from 'next/link';
+import ImagePlaceholder from '@/components/ui/image-placeholder';
+
+export default function AboutPage() {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold text-center mb-8">About Predictics Inc.</h1>
+    <div className="container mx-auto px-4 py-8 md:py-12 overflow-x-hidden">
+      {/* Hero Section */}
+      <div className="mb-12 md:mb-16 relative">
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent rounded-lg -z-10"></div>
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 items-center">
+          <div className="p-4 md:p-8">
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6 bg-clip-text text-transparent bg-gradient-to-r from-primary to-primary/60">About Predictics Inc.</h1>
+            <p className="text-base md:text-xl mb-4 md:mb-6 leading-relaxed">
+              Founded in 2018, Predictics Inc. is a leading enterprise AI and data consulting firm specializing in 
+              helping large organizations harness the power of their data to drive business growth and innovation.
+            </p>
+            <p className="text-base md:text-xl mb-6 leading-relaxed">
+              Our team of experts combines deep technical expertise with industry knowledge to deliver solutions 
+              that address real business challenges and create measurable value.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4">
+              <Button size="lg" className="w-full sm:w-auto" asChild>
+                <Link href="/contact">
+                  Get in Touch <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
+                <Link href="/services">
+                  Our Services
+                </Link>
+              </Button>
+            </div>
+          </div>
+          <div className="relative h-60 md:h-80 w-full flex items-center justify-center">
+            <div className="absolute inset-0 bg-primary/5 rounded-lg overflow-hidden">
+              <ImagePlaceholder type="data-team" className="h-full w-full" />
+            </div>
+          </div>
+        </div>
+      </div>
       
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Our Mission</h2>
-        <p className="text-lg mb-4">
-          At Predictics Inc., we're dedicated to helping large enterprises unlock the full potential of their data assets. 
-          Our mission is to transform complex data challenges into strategic business advantages through innovative AI solutions, 
-          advanced analytics, and data engineering expertise. We bridge the gap between cutting-edge technology and practical 
-          business applications to deliver measurable, long-term value for our clients.
-        </p>
-      </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Our Expertise</h2>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Enterprise AI Solutions</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>We design and implement scalable, production-grade AI systems tailored to enterprise requirements, 
-              with a focus on enhancing decision-making processes and operational efficiency.</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Advanced Analytics</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Our team excels in turning complex datasets into actionable insights through statistical modeling, 
-              predictive analytics, and machine learning techniques customized for each client's unique needs.</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Data Engineering</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>We architect robust data infrastructures that form the foundation for advanced analytics and AI initiatives, 
-              ensuring data quality, integration, and accessibility across the enterprise.</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardHeader>
-              <CardTitle>Strategic Advisory</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <p>Our consultants provide expert guidance on data strategy, technology selection, and organizational 
-              transformation to help enterprises navigate their AI and analytics journey successfully.</p>
-            </CardContent>
-          </Card>
+      {/* Our Expertise Section */}
+      <section className="mb-12 md:mb-20">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Our Expertise</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+            Specialized technical capabilities backed by industry knowledge
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6">
+          {[
+            { icon: <Database className="h-6 w-6 md:h-8 md:w-8 text-primary" />, title: "Data Architecture", desc: "Designing robust, scalable data infrastructure" },
+            { icon: <BookOpen className="h-6 w-6 md:h-8 md:w-8 text-primary" />, title: "Advanced Analytics", desc: "Turning complex data into actionable insights" },
+            { icon: <Users className="h-6 w-6 md:h-8 md:w-8 text-primary" />, title: "AI Development", desc: "Building custom AI solutions for enterprise needs" },
+            { icon: <Compass className="h-6 w-6 md:h-8 md:w-8 text-primary" />, title: "Strategy & Governance", desc: "Guiding organizational AI transformation" }
+          ].map((item, i) => (
+            <Card key={i} className="hover:shadow-md transition-all duration-300 group bg-muted/30">
+              <CardContent className="p-6">
+                <div className="mb-4 w-12 h-12 md:w-16 md:h-16 flex items-center justify-center rounded-full bg-primary/10 group-hover:bg-primary/20 transition-all duration-300">
+                  {item.icon}
+                </div>
+                <h3 className="text-lg md:text-xl font-semibold mb-2">{item.title}</h3>
+                <p className="text-sm md:text-base text-muted-foreground">{item.desc}</p>
+              </CardContent>
+            </Card>
+          ))}
         </div>
       </section>
-
-      <section className="mb-12 bg-muted p-8 rounded-lg">
-        <h2 className="text-2xl font-semibold mb-4">Our Clients</h2>
-        <p className="text-lg mb-6">
-          We partner with industry leaders across diverse sectors, helping them solve their most complex data challenges. 
-          Our client portfolio includes Fortune 500 companies and large organizations in:
-        </p>
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">Healthcare</h3>
-            <p className="text-sm text-muted-foreground">Predictive patient care, operational optimization</p>
+      
+      {/* Clients Section */}
+      <section className="mb-12 md:mb-20 bg-muted p-6 md:p-12 rounded-lg">
+        <div className="text-center mb-8 md:mb-10">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Trusted by Leading Organizations</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+            We partner with enterprises across industries to solve their most complex data challenges
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+          {['healthcare', 'cpg', 'electronics', 'mining', 'insurance', 'government'].map((type, i) => (
+            <div key={i} className="bg-background rounded-lg p-4 flex items-center justify-center min-h-[80px] hover:shadow-md transition-all duration-300">
+              <ImagePlaceholder type={type as 'healthcare' | 'cpg' | 'electronics' | 'mining' | 'insurance' | 'government'} className="h-8 w-8 md:h-10 md:w-10" />
+            </div>
+          ))}
+        </div>
+      </section>
+      
+      {/* Leadership Team Section */}
+      <section className="mb-12 md:mb-20">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Our Leadership Team</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+            Meet the experts guiding our mission to transform enterprises through data and AI
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {[
+            { name: "Alexandra Chen", role: "CEO & Founder", bio: "Former CTO at a Fortune 100 tech company with 20+ years of experience in enterprise data solutions." },
+            { name: "Michael Rivera", role: "Chief Data Scientist", bio: "PhD in Machine Learning with extensive experience developing AI models for healthcare and finance." },
+            { name: "Sarah Johnson", role: "VP of Client Success", bio: "15+ years of experience leading enterprise transformation initiatives in various industries." },
+          ].map((person, i) => (
+            <Card key={i} className="overflow-hidden group hover:shadow-lg transition-all duration-300">
+              <div className="h-48 md:h-64 bg-primary/5 flex items-center justify-center overflow-hidden">
+                <ImagePlaceholder type="team" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+              </div>
+              <CardContent className="p-6">
+                <h3 className="text-lg md:text-xl font-semibold mb-1">{person.name}</h3>
+                <p className="text-sm md:text-base text-primary mb-3">{person.role}</p>
+                <p className="text-sm md:text-base text-muted-foreground">{person.bio}</p>
+              </CardContent>
+              <CardFooter className="p-6 pt-0">
+                <Button variant="outline" size="sm" className="flex items-center gap-1 text-xs md:text-sm">
+                  View Profile <ArrowUpRight className="h-3 w-3" />
+                </Button>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      </section>
+      
+      {/* Our Approach Section */}
+      <section className="mb-12 md:mb-20">
+        <div className="text-center mb-8 md:mb-12">
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Our Approach</h2>
+          <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
+            A proven methodology for enterprise AI transformation
+          </p>
+        </div>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="relative bg-muted rounded-lg overflow-hidden h-60 md:h-auto">
+            <ImagePlaceholder type="meeting" className="h-full w-full" />
           </div>
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">Consumer Packaged Goods</h3>
-            <p className="text-sm text-muted-foreground">Supply chain intelligence, demand forecasting</p>
-          </div>
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">Electronics</h3>
-            <p className="text-sm text-muted-foreground">Manufacturing analytics, quality control</p>
-          </div>
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">Mining</h3>
-            <p className="text-sm text-muted-foreground">Operational efficiency, predictive maintenance</p>
-          </div>
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">P&C Insurance</h3>
-            <p className="text-sm text-muted-foreground">Risk modeling, claims analytics</p>
-          </div>
-          <div className="bg-background p-4 rounded-md text-center">
-            <h3 className="font-medium">Government & Non-Profits</h3>
-            <p className="text-sm text-muted-foreground">Program effectiveness, resource optimization</p>
+          <div className="space-y-4 md:space-y-6">
+            {[
+              { icon: <Target className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Discover", desc: "We begin by understanding your business objectives and current data landscape." },
+              { icon: <Clock className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Design", desc: "Our experts create a tailored solution architecture to address your specific challenges." },
+              { icon: <Award className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Deliver", desc: "We implement solutions using agile methodologies to ensure rapid value creation." },
+              { icon: <Compass className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Drive", desc: "We provide ongoing support and optimization to maximize long-term business impact." }
+            ].map((step, i) => (
+              <div key={i} className="flex gap-4 md:gap-5 items-start bg-background p-4 md:p-6 rounded-lg hover:shadow-md transition-all duration-300">
+                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
+                  {step.icon}
+                </div>
+                <div>
+                  <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">{step.title}</h3>
+                  <p className="text-sm md:text-base text-muted-foreground">{step.desc}</p>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </section>
-
-      <section className="mb-12">
-        <h2 className="text-2xl font-semibold mb-4">Our Leadership Team</h2>
-        <p className="text-lg mb-6">
-          Our leadership team combines deep technical expertise with extensive industry experience to deliver solutions 
-          that address the most challenging business problems.
+      
+      {/* CTA Section */}
+      <section className="bg-muted rounded-lg p-6 md:p-12 text-center">
+        <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Ready to Start Your AI Journey?</h2>
+        <p className="text-base md:text-xl max-w-3xl mx-auto mb-6 md:mb-8">
+          Let's discuss how our enterprise AI and data solutions can drive measurable business impact for your organization.
         </p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card>
-            <CardContent className="flex flex-col items-center pt-6">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Executive Leadership</h3>
-              <p className="text-sm text-center mt-2">With backgrounds from Fortune 500 technology companies and leading research institutions, our executives bring decades of experience in enterprise AI and data solutions.</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex flex-col items-center pt-6">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Technical Leadership</h3>
-              <p className="text-sm text-center mt-2">Our technical leaders are pioneers in data science, machine learning, and software engineering with advanced degrees and proven industry expertise.</p>
-            </CardContent>
-          </Card>
-          <Card>
-            <CardContent className="flex flex-col items-center pt-6">
-              <div className="w-16 h-16 rounded-full bg-primary/10 flex items-center justify-center mb-4">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                </svg>
-              </div>
-              <h3 className="text-lg font-semibold">Industry Advisors</h3>
-              <p className="text-sm text-center mt-2">Former executives and thought leaders from key industries provide strategic guidance to ensure our solutions address real-world business challenges.</p>
-            </CardContent>
-          </Card>
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <Button size="lg" className="w-full sm:w-auto" asChild>
+            <Link href="/contact">
+              Schedule a Consultation <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button size="lg" variant="outline" className="w-full sm:w-auto" asChild>
+            <Link href="/case-studies">
+              View Our Case Studies
+            </Link>
+          </Button>
         </div>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-semibold mb-4">Our Approach</h2>
-        <p className="text-lg mb-4">
-          Predictics Inc. delivers value through a proven methodology that emphasizes collaboration, 
-          domain expertise, and a focus on business outcomes:
-        </p>
-        <ol className="list-decimal list-inside space-y-2 mb-4">
-          <li><span className="font-medium">Discovery & Assessment</span> - Thorough analysis of your data landscape, business objectives, and current capabilities</li>
-          <li><span className="font-medium">Strategic Roadmap</span> - Development of a customized plan aligned with your business priorities</li>
-          <li><span className="font-medium">Solution Design</span> - Architecture and design of robust, scalable data and AI solutions</li>
-          <li><span className="font-medium">Implementation</span> - Expert delivery with rigorous quality control and knowledge transfer</li>
-          <li><span className="font-medium">Measurement & Optimization</span> - Continuous refinement to maximize ROI and business impact</li>
-        </ol>
-        <p className="text-lg mt-6">
-          By combining our technical expertise with deep industry knowledge, we ensure that our solutions 
-          drive tangible business results and sustainable competitive advantage for our clients.
-        </p>
       </section>
     </div>
   );

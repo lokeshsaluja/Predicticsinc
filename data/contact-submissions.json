@@ -1,0 +1,24 @@
+[
+  {
+    "id": "local_1743650977148_5fumffxy",
+    "name": "Manual Test",
+    "email": "manual@test.com",
+    "company": "Test Corp",
+    "industry": "",
+    "service": "",
+    "message": "This is a direct test of the API",
+    "created_at": "2025-04-03T03:29:37.148Z",
+    "source": "file_fallback"
+  },
+  {
+    "id": "local_1743651398911_0t56m2sh",
+    "name": "Lokesh Saluja",
+    "email": "lokeshsaluja@yahoo.com",
+    "company": "Predictics Inc",
+    "industry": "healthcare",
+    "service": "advanced-analytics",
+    "message": "I want to test this form",
+    "created_at": "2025-04-03T03:36:38.911Z",
+    "source": "file_fallback"
+  }
+]
