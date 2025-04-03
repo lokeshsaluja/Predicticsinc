@@ -2,6 +2,7 @@ import { NextResponse } from 'next/server';
 import { insertContactForm, testDatabaseConnection } from '@/lib/db';
 import { saveContactToFile, ensureDataDirectoryExists } from '@/lib/file-storage';
 import { saveContactToKV } from '@/lib/kv-storage';
+import { sendContactFormEmail } from '@/lib/email-service';
 
 // This is crucial - it tells Next.js this route must be dynamically rendered
 export const dynamic = 'force-dynamic';
@@ -126,6 +127,40 @@ export async function POST(request: Request) {
       }
     }
     
+    // Send email notification as a fallback if other storage methods failed
+    // or send email in all cases if enabled
+    let emailSuccess = false;
+    if (!dbSuccess && !kvSuccess && !fileSuccess) {
+      console.log('All storage methods failed, trying email fallback');
+      try {
+        const emailResult = await sendContactFormEmail(submissionRecord);
+        emailSuccess = emailResult.success;
+        
+        if (emailSuccess) {
+          console.log('Email fallback successful');
+        } else {
+          console.log('Email fallback failed:', emailResult);
+        }
+      } catch (emailError) {
+        console.error('Email error:', emailError);
+      }
+    } else if (process.env.ALWAYS_SEND_EMAIL === 'true') {
+      // Always send email if configured to do so, regardless of other storage methods
+      console.log('Sending email notification (always enabled)');
+      try {
+        const emailResult = await sendContactFormEmail(submissionRecord);
+        emailSuccess = emailResult.success;
+        
+        if (emailSuccess) {
+          console.log('Email notification sent successfully');
+        } else {
+          console.log('Failed to send email notification:', emailResult);
+        }
+      } catch (emailError) {
+        console.error('Email notification error:', emailError);
+      }
+    }
+    
     // Return success regardless of storage success in production
     // This ensures the user gets a good experience even if backend storage is failing
     return NextResponse.json({
@@ -134,7 +169,8 @@ export async function POST(request: Request) {
       storage: {
         db: dbSuccess,
         kv: kvSuccess,
-        file: fileSuccess
+        file: fileSuccess,
+        email: emailSuccess
       }
     });
   } catch (error) {
