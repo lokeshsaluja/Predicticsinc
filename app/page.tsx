@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter } from '@/components/ui/card';
 import { Brain, Database, TrendingUp, BarChart, Shield, LineChart, PieChart, ArrowRight } from 'lucide-react';
-import ImagePlaceholder from '@/components/ui/image-placeholder';
+import ProfessionalImage from '@/components/ui/professional-image';
 import Logo from '@/components/logo';
 
 export default function Home() {
@@ -40,11 +40,12 @@ export default function Home() {
               <div className="relative w-full max-w-md">
                 <div className="absolute -top-4 -left-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
                 <div className="absolute -bottom-8 -right-8 w-40 h-40 bg-secondary/10 rounded-full blur-xl"></div>
-                <ImagePlaceholder 
+                <ProfessionalImage 
                   type="hero" 
                   width={500} 
                   height={400} 
-                  className="w-full h-auto rounded-2xl shadow-lg" 
+                  className="w-full h-auto rounded-2xl shadow-lg"
+                  priority={true}
                 />
               </div>
             </div>
@@ -65,7 +66,7 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden group">
               <div className="h-48 overflow-hidden">
-                <ImagePlaceholder type="ai-strategy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <ProfessionalImage type="ai-strategy" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center text-xl">
@@ -86,7 +87,7 @@ export default function Home() {
             
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden group">
               <div className="h-48 overflow-hidden">
-                <ImagePlaceholder type="data-science" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <ProfessionalImage type="data-engineering" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center text-xl">
@@ -107,7 +108,7 @@ export default function Home() {
             
             <Card className="border-0 shadow-md hover:shadow-lg transition-all duration-300 bg-card/50 backdrop-blur-sm overflow-hidden group">
               <div className="h-48 overflow-hidden">
-                <ImagePlaceholder type="machine-learning" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
+                <ProfessionalImage type="machine-learning" className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" />
               </div>
               <CardHeader>
                 <CardTitle className="flex items-center text-xl">
@@ -180,14 +181,15 @@ export default function Home() {
               </Card>
             </div>
             <div className="order-1 md:order-2 flex justify-center">
-              <div className="relative w-full max-w-md">
-                <div className="absolute -top-4 -right-4 w-24 h-24 bg-primary/10 rounded-full blur-xl"></div>
-                <ImagePlaceholder 
-                  type="case-study" 
-                  width={500} 
-                  height={350} 
-                  className="w-full h-auto rounded-2xl shadow-lg" 
-                />
+              <div className="relative w-full h-80 md:h-96 overflow-hidden rounded-xl shadow-lg">
+                <ProfessionalImage type="case-study" className="w-full h-full object-cover" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"></div>
+                <div className="absolute bottom-4 left-4 right-4">
+                  <div className="flex items-center text-white gap-2 mb-2">
+                    <Shield className="text-primary" size={20} />
+                    <span className="text-sm font-medium">Healthcare Industry</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -207,37 +209,37 @@ export default function Home() {
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="Healthcare" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="Healthcare" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">Healthcare</p>
             </div>
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="Insurance" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="Insurance" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">Insurance</p>
             </div>
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="CPG" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="CPG" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">CPG</p>
             </div>
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="Electronics" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="Electronics" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">Electronics</p>
             </div>
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="Mining" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="Mining" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">Mining</p>
             </div>
             <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
               <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ImagePlaceholder type="industry" industry="Government" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+                <ProfessionalImage type="industry" industry="Government" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
               </div>
               <p className="font-medium">Government</p>
             </div>
@@ -259,7 +261,7 @@ export default function Home() {
             <Card className="border-0 shadow-lg bg-gradient-to-br from-card/90 to-card p-1">
               <CardContent className="flex flex-col md:flex-row items-center gap-6 p-8">
                 <div className="w-24 h-24 md:w-32 md:h-32 flex-shrink-0">
-                  <ImagePlaceholder type="testimonial" width={128} height={128} />
+                  <ProfessionalImage type="testimonial" width={128} height={128} />
                 </div>
                 <div>
                   <blockquote className="text-lg md:text-xl italic mb-4">

@@ -30,6 +30,8 @@ type PlaceholderType =
   | 'data-team'
   | 'team'
   | 'meeting'
+  | 'abstract-team'
+  | 'enterprise-meeting'
   | 'data-engineering';
 
 interface ImagePlaceholderProps {

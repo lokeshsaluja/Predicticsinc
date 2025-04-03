@@ -4,7 +4,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle, CardFooter }
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Database, LineChart, Brain, ArrowRight, Server, Shield, Code, Workflow, Users, Compass, BarChart, TrendingUp, Globe, FileCode, PieChart, LayoutGrid } from 'lucide-react';
-import ImagePlaceholder from '@/components/ui/image-placeholder';
+import ProfessionalImage from '@/components/ui/professional-image';
 
 export default function Services() {
   return (
@@ -28,7 +28,7 @@ export default function Services() {
           </div>
           <div className="relative h-60 md:h-80 w-full flex items-center justify-center">
             <div className="absolute inset-0 bg-primary/5 rounded-lg overflow-hidden">
-              <ImagePlaceholder type="analytics" className="h-full w-full" />
+              <ProfessionalImage type="analytics" className="h-full w-full" />
             </div>
           </div>
         </div>
@@ -102,7 +102,7 @@ export default function Services() {
             </div>
           </div>
           <div className="relative h-64 md:h-auto lg:aspect-auto min-h-[300px] md:min-h-[400px] bg-primary/5 flex items-center justify-center overflow-hidden">
-            <ImagePlaceholder type="data-science" className="h-full w-full object-cover" />
+            <ProfessionalImage type="enterprise-clients" className="h-full w-full object-cover" />
           </div>
         </div>
       </section>
@@ -343,7 +343,7 @@ export default function Services() {
             <CardContent>
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-full md:w-1/3 h-48 rounded-lg overflow-hidden bg-primary/5 flex items-center justify-center">
-                  <ImagePlaceholder type="data-science" className="h-full w-full object-cover" />
+                  <ProfessionalImage type="data-science" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-2/3">
                   <p className="mb-4 text-sm md:text-base">
@@ -387,7 +387,7 @@ export default function Services() {
             <CardContent>
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-full md:w-1/3 h-48 rounded-lg overflow-hidden bg-primary/5 flex items-center justify-center">
-                  <ImagePlaceholder type="enterprise-clients" className="h-full w-full object-cover" />
+                  <ProfessionalImage type="enterprise-clients" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-2/3">
                   <p className="mb-4 text-sm md:text-base">
@@ -431,7 +431,7 @@ export default function Services() {
             <CardContent>
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-full md:w-1/3 h-48 rounded-lg overflow-hidden bg-primary/5 flex items-center justify-center">
-                  <ImagePlaceholder type="data-visualization" className="h-full w-full object-cover" />
+                  <ProfessionalImage type="data-visualization" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-2/3">
                   <p className="mb-4 text-sm md:text-base">
@@ -475,7 +475,7 @@ export default function Services() {
             <CardContent>
               <div className="flex flex-col md:flex-row gap-6 items-start">
                 <div className="w-full md:w-1/3 h-48 rounded-lg overflow-hidden bg-primary/5 flex items-center justify-center">
-                  <ImagePlaceholder type="ai-strategy" className="h-full w-full object-cover" />
+                  <ProfessionalImage type="ai-strategy" className="h-full w-full object-cover" />
                 </div>
                 <div className="w-full md:w-2/3">
                   <p className="mb-4 text-sm md:text-base">
@@ -523,12 +523,12 @@ export default function Services() {
         
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4 md:gap-6">
           {[
-            { name: "Healthcare", icon: <ImagePlaceholder type="healthcare" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Patient analytics & operational efficiency" },
-            { name: "CPG", icon: <ImagePlaceholder type="cpg" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Supply chain & consumer insights" },
-            { name: "Electronics", icon: <ImagePlaceholder type="electronics" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Manufacturing analytics & quality" },
-            { name: "Mining", icon: <ImagePlaceholder type="mining" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Operations & predictive maintenance" },
-            { name: "Insurance", icon: <ImagePlaceholder type="insurance" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Risk modeling & claims analytics" },
-            { name: "Government", icon: <ImagePlaceholder type="government" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Program effectiveness & resources" }
+            { name: "Healthcare", icon: <ProfessionalImage type="healthcare" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Patient analytics & operational efficiency" },
+            { name: "CPG", icon: <ProfessionalImage type="cpg" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Supply chain & consumer insights" },
+            { name: "Electronics", icon: <ProfessionalImage type="electronics" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Manufacturing analytics & quality" },
+            { name: "Mining", icon: <ProfessionalImage type="mining" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Operations & predictive maintenance" },
+            { name: "Insurance", icon: <ProfessionalImage type="insurance" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Risk modeling & claims analytics" },
+            { name: "Government", icon: <ProfessionalImage type="government" className="h-10 w-10 md:h-12 md:w-12" />, desc: "Program effectiveness & resources" }
           ].map((industry, index) => (
             <Card key={index} className="hover:shadow-lg transition-all duration-300 hover:-translate-y-1 text-center">
               <CardContent className="pt-4 md:pt-6 px-2 md:px-4">

@@ -6,7 +6,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle, CardDescription }
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { ArrowRight, ArrowUpRight, Users, Compass, Award, BookOpen, Target, Clock, Database } from 'lucide-react';
 import Link from 'next/link';
-import ImagePlaceholder from '@/components/ui/image-placeholder';
+import ProfessionalImage from '@/components/ui/professional-image';
 
 export default function AboutPage() {
   return (
@@ -40,7 +40,7 @@ export default function AboutPage() {
           </div>
           <div className="relative h-60 md:h-80 w-full flex items-center justify-center">
             <div className="absolute inset-0 bg-primary/5 rounded-lg overflow-hidden">
-              <ImagePlaceholder type="data-team" className="h-full w-full" />
+              <ProfessionalImage type="data-team" className="h-full w-full" />
             </div>
           </div>
         </div>
@@ -87,43 +87,57 @@ export default function AboutPage() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
           {['healthcare', 'cpg', 'electronics', 'mining', 'insurance', 'government'].map((type, i) => (
             <div key={i} className="bg-background rounded-lg p-4 flex items-center justify-center min-h-[80px] hover:shadow-md transition-all duration-300">
-              <ImagePlaceholder type={type as 'healthcare' | 'cpg' | 'electronics' | 'mining' | 'insurance' | 'government'} className="h-8 w-8 md:h-10 md:w-10" />
+              <ProfessionalImage type={type as 'healthcare' | 'cpg' | 'electronics' | 'mining' | 'insurance' | 'government'} className="h-8 w-8 md:h-10 md:w-10" />
             </div>
           ))}
         </div>
       </section>
       
-      {/* Leadership Team Section */}
+      {/* Team Approach Section */}
       <section className="mb-12 md:mb-20">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Our Leadership Team</h2>
+          <h2 className="text-2xl md:text-3xl font-bold mb-3 md:mb-4">Our Collective Expertise</h2>
           <p className="text-base md:text-lg text-muted-foreground max-w-3xl mx-auto">
-            Meet the experts guiding our mission to transform enterprises through data and AI
+            We bring together diverse skills and perspectives to deliver exceptional solutions
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
-          {[
-            { name: "Alexandra Chen", role: "CEO & Founder", bio: "Former CTO at a Fortune 100 tech company with 20+ years of experience in enterprise data solutions." },
-            { name: "Michael Rivera", role: "Chief Data Scientist", bio: "PhD in Machine Learning with extensive experience developing AI models for healthcare and finance." },
-            { name: "Sarah Johnson", role: "VP of Client Success", bio: "15+ years of experience leading enterprise transformation initiatives in various industries." },
-          ].map((person, i) => (
-            <Card key={i} className="overflow-hidden group hover:shadow-lg transition-all duration-300">
-              <div className="h-48 md:h-64 bg-primary/5 flex items-center justify-center overflow-hidden">
-                <ImagePlaceholder type="team" className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8">
+          <Card className="bg-muted/30 hover:shadow-md transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="mb-4 relative h-40 overflow-hidden rounded-lg">
+                <ProfessionalImage type="abstract-team" className="h-full w-full object-cover" />
               </div>
-              <CardContent className="p-6">
-                <h3 className="text-lg md:text-xl font-semibold mb-1">{person.name}</h3>
-                <p className="text-sm md:text-base text-primary mb-3">{person.role}</p>
-                <p className="text-sm md:text-base text-muted-foreground">{person.bio}</p>
-              </CardContent>
-              <CardFooter className="p-6 pt-0">
-                <Button variant="outline" size="sm" className="flex items-center gap-1 text-xs md:text-sm">
-                  View Profile <ArrowUpRight className="h-3 w-3" />
-                </Button>
-              </CardFooter>
-            </Card>
-          ))}
+              <h3 className="text-lg font-semibold mb-2">Collaborative Teams</h3>
+              <p className="text-sm text-muted-foreground">
+                Our cross-functional teams combine technical expertise with domain knowledge to address complex challenges across industries.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-muted/30 hover:shadow-md transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="mb-4 relative h-40 overflow-hidden rounded-lg">
+                <ProfessionalImage type="data-science" className="h-full w-full object-cover" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Deep Technical Expertise</h3>
+              <p className="text-sm text-muted-foreground">
+                Our specialists have backgrounds from leading tech companies and research institutions, bringing best practices to every project.
+              </p>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-muted/30 hover:shadow-md transition-all duration-300">
+            <CardContent className="p-6">
+              <div className="mb-4 relative h-40 overflow-hidden rounded-lg">
+                <ProfessionalImage type="data-analytics" className="h-full w-full object-cover" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Industry Knowledge</h3>
+              <p className="text-sm text-muted-foreground">
+                We've built specialized expertise in key industries including Healthcare, CPG, Electronics, and more.
+              </p>
+            </CardContent>
+          </Card>
         </div>
       </section>
       
@@ -136,27 +150,45 @@ export default function AboutPage() {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
-          <div className="relative bg-muted rounded-lg overflow-hidden h-60 md:h-auto">
-            <ImagePlaceholder type="meeting" className="h-full w-full" />
-          </div>
-          <div className="space-y-4 md:space-y-6">
-            {[
-              { icon: <Target className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Discover", desc: "We begin by understanding your business objectives and current data landscape." },
-              { icon: <Clock className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Design", desc: "Our experts create a tailored solution architecture to address your specific challenges." },
-              { icon: <Award className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Deliver", desc: "We implement solutions using agile methodologies to ensure rapid value creation." },
-              { icon: <Compass className="h-5 w-5 md:h-6 md:w-6 text-primary shrink-0" />, title: "Drive", desc: "We provide ongoing support and optimization to maximize long-term business impact." }
-            ].map((step, i) => (
-              <div key={i} className="flex gap-4 md:gap-5 items-start bg-background p-4 md:p-6 rounded-lg hover:shadow-md transition-all duration-300">
-                <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
-                  {step.icon}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+          <div className="order-2 lg:order-1">
+            <div className="space-y-6">
+              <div className="flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Target className="h-6 w-6" />
                 </div>
                 <div>
-                  <h3 className="text-base md:text-lg font-semibold mb-1 md:mb-2">{step.title}</h3>
-                  <p className="text-sm md:text-base text-muted-foreground">{step.desc}</p>
+                  <h3 className="text-lg font-semibold mb-1">Discovery & Strategy</h3>
+                  <p className="text-sm text-muted-foreground">We begin by understanding your business goals and data landscape to identify high-impact opportunities.</p>
                 </div>
               </div>
-            ))}
+              
+              <div className="flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Award className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">Solution Design</h3>
+                  <p className="text-sm text-muted-foreground">Our experts design custom AI and data solutions tailored to your specific business challenges.</p>
+                </div>
+              </div>
+              
+              <div className="flex gap-4">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                  <Clock className="h-6 w-6" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-1">Implementation & Integration</h3>
+                  <p className="text-sm text-muted-foreground">We build and integrate solutions that work seamlessly with your existing systems and processes.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="order-1 lg:order-2 relative">
+            <div className="h-60 md:h-80 overflow-hidden rounded-lg shadow-lg">
+              <ProfessionalImage type="enterprise-meeting" className="h-full w-full object-cover" />
+            </div>
           </div>
         </div>
       </section>

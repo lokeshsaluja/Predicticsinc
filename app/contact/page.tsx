@@ -12,7 +12,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Building2, Mail, Phone, Clock, ArrowRight, Globe, MapPin, CalendarClock, Users, CheckCircle, Loader2 } from "lucide-react"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import ImagePlaceholder from "@/components/ui/image-placeholder"
+import ProfessionalImage from "@/components/ui/professional-image"
 
 const formSchema = z.object({
   name: z.string().min(2, {
@@ -177,9 +177,13 @@ export default function ContactPage() {
               </div>
             </div>
           </div>
-          <div className="relative h-60 md:h-80 w-full flex items-center justify-center overflow-hidden rounded-lg">
-            <div className="absolute inset-0 bg-primary/5">
-              <ImagePlaceholder type="analytics" className="h-full w-full object-cover" />
+          <div className="order-1 md:order-2 relative h-72 md:h-96">
+            <div className="absolute inset-0 rounded-lg overflow-hidden">
+              <ProfessionalImage 
+                type="contact"
+                className="h-full w-full object-cover" 
+                priority={true}
+              />
             </div>
           </div>
         </div>
