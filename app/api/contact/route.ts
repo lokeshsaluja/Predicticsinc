@@ -1,12 +1,16 @@
 import { NextResponse } from 'next/server';
-import { insertContactForm, DbResult } from '@/lib/db';
+import { insertContactForm, DbResult, testDatabaseConnection } from '@/lib/db';
 import { saveContactToFile, ensureDataDirectoryExists } from '@/lib/file-storage';
 
 // This is crucial - it tells Next.js this route must be dynamically rendered
 export const dynamic = 'force-dynamic';
 
+// Detect environment
+const isVercelEnvironment = process.env.VERCEL === '1';
+const isProduction = process.env.NODE_ENV === 'production';
+
 export async function POST(request: Request) {
-  console.log('Contact API route called');
+  console.log(`Contact API route called in ${isVercelEnvironment ? 'Vercel' : 'Local'} environment (${process.env.NODE_ENV})`);
   
   try {
     // Use request.json() directly instead of request.text()
@@ -49,6 +53,14 @@ export async function POST(request: Request) {
     
     console.log('Processing contact data:', contactData);
     
+    // Test database connection first
+    try {
+      const dbConnected = await testDatabaseConnection();
+      console.log(`Database connection test: ${dbConnected ? 'SUCCESS' : 'FAILED'}`);
+    } catch (connError) {
+      console.error('Database connection test error:', connError);
+    }
+    
     // Try database first, with proper error handling
     let dbSuccess = false;
     let dbResult: DbResult | null = null;
@@ -67,10 +79,29 @@ export async function POST(request: Request) {
         });
       } else {
         console.log('Database storage failed, falling back to file');
+        console.log('DB Error details:', dbResult?.error, dbResult?.details);
       }
     } catch (dbError) {
       console.error('Database error occurred:', dbError);
       // Continue to file fallback
+    }
+    
+    // In Vercel production, if database fails, don't try file storage as it won't work
+    if (isVercelEnvironment && isProduction) {
+      console.log('Running in Vercel production - skipping file storage fallback');
+      return NextResponse.json(
+        { 
+          success: false, 
+          message: 'Unable to process your submission. Please try again later.',
+          error: 'Database connection failed in production environment',
+          env: {
+            vercel: true,
+            production: true,
+            postgres_url_exists: !!process.env.POSTGRES_URL
+          }
+        },
+        { status: 500 }
+      );
     }
     
     // File storage fallback - guaranteed to run if database failed
@@ -100,14 +131,18 @@ export async function POST(request: Request) {
     } catch (fileError) {
       console.error('File storage error:', fileError);
       return NextResponse.json(
-        { success: false, message: 'File storage error' },
+        { success: false, message: 'Error saving submission to file' },
         { status: 500 }
       );
     }
   } catch (error) {
-    console.error('API route error:', error);
+    console.error('Unexpected error in contact API route:', error);
     return NextResponse.json(
-      { success: false, message: 'Server error processing your request' },
+      { 
+        success: false, 
+        message: 'An unexpected error occurred',
+        details: error instanceof Error ? error.message : String(error)
+      },
       { status: 500 }
     );
   }
