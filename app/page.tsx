@@ -207,41 +207,89 @@ export default function Home() {
           </div>
           
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="Healthcare" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="Healthcare" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">Healthcare</p>
+              <p className="font-medium mt-3">Healthcare</p>
             </div>
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="Insurance" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="Insurance" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">Insurance</p>
+              <p className="font-medium mt-3">Insurance</p>
             </div>
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="CPG" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="CPG" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover scale-[1.25]" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">CPG</p>
+              <p className="font-medium mt-3">CPG</p>
             </div>
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="Electronics" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="Electronics" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover object-top scale-[0.85]" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">Electronics</p>
+              <p className="font-medium mt-3">Electronics</p>
             </div>
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="Mining" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="Mining" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">Mining</p>
+              <p className="font-medium mt-3">Mining</p>
             </div>
-            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group">
-              <div className="mb-4 w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                <ProfessionalImage type="industry" industry="Government" width={80} height={80} className="group-hover:scale-110 transition-transform duration-300" />
+            <div className="p-6 bg-card rounded-xl shadow-sm hover:shadow-md transition-all duration-300 text-center group flex flex-col items-center justify-between h-[180px] md:h-[240px]">
+              <div className="flex items-center justify-center h-[100px] md:h-[140px] w-full">
+                <div className="relative h-[80px] md:h-[120px] w-[80px] md:w-[120px] overflow-hidden">
+                  <ProfessionalImage 
+                    type="industry" 
+                    industry="Government" 
+                    width={120} 
+                    height={120} 
+                    className="group-hover:scale-110 transition-transform duration-300 object-cover" 
+                  />
+                </div>
               </div>
-              <p className="font-medium">Government</p>
+              <p className="font-medium mt-3">Government</p>
             </div>
           </div>
         </div>
@@ -265,13 +313,13 @@ export default function Home() {
                 </div>
                 <div>
                   <blockquote className="text-lg md:text-xl italic mb-4">
-                    "Predictics Inc. has been an invaluable partner in our digital transformation journey. Their deep expertise in data science and AI has enabled us to create predictive models that have revolutionized our supply chain operations."
+                    "Predictics Inc. has been an invaluable partner in our digital transformation journey. Their deep expertise in data science and AI has enabled us to create forecasting models that have revolutionized our supply chain operations."
                   </blockquote>
                   <div className="flex items-center">
                     <div className="h-px w-8 bg-primary mr-3"></div>
                     <div>
-                      <p className="font-semibold">Maria Chen</p>
-                      <p className="text-sm text-muted-foreground">CTO at Global Consumer Products</p>
+                      <p className="font-semibold">Pierre Garcia</p>
+                      <p className="text-sm text-muted-foreground">Director at ABInBev</p>
                     </div>
                   </div>
                 </div>

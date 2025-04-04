@@ -48,35 +48,35 @@ interface ProfessionalImageProps {
 
 // Map of image types to their URLs
 const imageMap: Record<ImageType, string> = {
-  'hero': '/images/enterprise-ai-solutions.jpg',
-  'analytics': '/images/advanced-analytics.jpg',
-  'data-science': '/images/data-science.jpg',
-  'machine-learning': '/images/machine-learning.jpg',
-  'ai-strategy': '/images/ai-strategy.jpg',
+  'hero': '/images/Happy_work_picture.jpg', // Updated homepage image
+  'analytics': '/images/Advanced_analytics.jpg', // Updated advanced analytics image
+  'data-science': '/images/Expertise.jpg', // Updated data science image
+  'machine-learning': '/images/Advanced_analytics.jpg', // Updated machine learning image
+  'ai-strategy': '/images/AI_strategy.png', // Updated AI strategy image
   'industry': '/images/industry-solutions.jpg',
-  'testimonial': '/images/client-testimonial.jpg',
+  'testimonial': '/images/ABInBev.jpg', // Updated testimonial image
   'case-study': '/images/case-study-healthcare.jpg',
   'data-visualization': '/images/data-visualization.jpg',
-  'healthcare': '/images/healthcare-industry.jpg',
-  'cpg': '/images/cpg-industry.jpg',
-  'electronics': '/images/electronics-industry.jpg',
-  'mining': '/images/mining-industry.jpg',
-  'insurance': '/images/insurance-industry.jpg',
-  'government': '/images/government-sector.jpg',
+  'healthcare': '/images/MaxHealth.png',
+  'cpg': '/images/ABInBev.jpg',
+  'electronics': '/images/Samsung.png', 
+  'mining': '/images/Teck.png',
+  'insurance': '/images/Definity.jpeg',
+  'government': '/images/CMHA.png',
   'enterprise-clients': '/images/enterprise-clients.jpg',
   'executive': '/images/executive-team.jpg',
   'technical': '/images/technical-team.jpg',
   'advisors': '/images/advisory-board.jpg',
   'healthcare-analytics': '/images/healthcare-analytics.jpg',
   'supply-chain': '/images/supply-chain-optimization.jpg',
-  'data-analytics': '/images/data-analytics-platform.jpg',
-  'contact': '/images/contact-enterprise.jpg',
-  'data-team': '/images/data-science-team.jpg',
+  'data-analytics': '/images/Industry Knowledge.jpg',
+  'contact': '/images/Contact Us.jpg',
+  'data-team': '/images/Collaboration.jpg',
   'team': '/images/abstract-team.jpg',
   'meeting': '/images/enterprise-meeting.jpg',
-  'abstract-team': '/images/abstract-team.jpg',
-  'enterprise-meeting': '/images/enterprise-meeting.jpg',
-  'data-engineering': '/images/data-engineering.jpg'
+  'abstract-team': '/images/Collaboration.jpg',
+  'enterprise-meeting': '/images/Collaboration.jpg',
+  'data-engineering': '/images/Data_engineering.jpg' // Updated data engineering image
 };
 
 // Default empty base64 image for instant loading
@@ -96,10 +96,31 @@ const ProfessionalImage: React.FC<ProfessionalImageProps> = ({
     objectFit: 'cover' as const,
     width: '100%',
     height: '100%',
+    ...(type === 'industry' && {
+      objectPosition: 'center',
+      objectFit: 'cover' as const,
+    })
   };
 
   // Get the image URL from our map
-  const imageUrl = imageMap[type] || '';
+  const imageUrl = (() => {
+    // If type is 'industry' and an industry name is provided
+    if (type === 'industry' && industry) {
+      // Map each industry to its specific image
+      const industryImageMap: Record<string, string> = {
+        'Healthcare': '/images/Healthcare.jpg',
+        'Insurance': '/images/Insurance.jpg',
+        'CPG': '/images/CPG.jpg',
+        'Electronics': '/images/CE.jpg', // CE.jpg for Electronics
+        'Mining': '/images/Mining.jpg',
+        'Government': '/images/Govt.jpg', // Govt.jpg for Government
+      };
+      
+      return industryImageMap[industry] || '/images/enterprise-clients.jpg'; // Fallback
+    }
+    
+    return imageMap[type] || '';
+  })();
   
   // Create a more descriptive alt text based on the image type
   const getAltText = () => {

@@ -48,7 +48,7 @@ export const Logo = ({ className = "", size = "default" }: { className?: string,
           PREDICTICS
         </span>
         <span className="text-xs tracking-wider text-gray-500 dark:text-gray-400" style={{ fontSize: '0.65rem' }}>
-          AI & DATA SOLUTIONS
+          AI & Predictive Analytics Solutions
         </span>
       </div>
     </div>
