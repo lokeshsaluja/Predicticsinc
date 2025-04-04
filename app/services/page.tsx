@@ -161,47 +161,6 @@ export default function Services() {
           <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group flex flex-col">
             <div className="h-48 bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden">
               <div className="absolute inset-0 flex items-center justify-center">
-                <LineChart className="h-16 w-16 text-primary/70 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xl font-semibold">Advanced Analytics</CardTitle>
-              <CardDescription className="text-base">
-                Transform complex data into actionable insights with customized analytics solutions.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>Predictive Analytics & Forecasting</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>Business Intelligence & Reporting</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>Customer Analytics & Segmentation</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>Financial & Operational Analytics</span>
-                </li>
-              </ul>
-            </CardContent>
-            <CardFooter className="pt-0">
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/case-studies/customer-segmentation-personalization">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
-          
-          <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group flex flex-col">
-            <div className="h-48 bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
                 <Brain className="h-16 w-16 text-primary/70 group-hover:scale-110 transition-transform duration-300" />
               </div>
             </div>
@@ -275,47 +234,6 @@ export default function Services() {
             <CardFooter className="pt-0">
               <Button variant="outline" className="w-full" asChild>
                 <Link href="/case-studies/healthcare-data-integration">
-                  Learn More <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-              </Button>
-            </CardFooter>
-          </Card>
-          
-          <Card className="overflow-hidden hover:shadow-lg transition-all duration-300 hover:-translate-y-1 group flex flex-col">
-            <div className="h-48 bg-gradient-to-br from-primary/10 to-primary/5 relative overflow-hidden">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <Workflow className="h-16 w-16 text-primary/70 group-hover:scale-110 transition-transform duration-300" />
-              </div>
-            </div>
-            <CardHeader className="pb-2">
-              <CardTitle className="text-xl font-semibold">AI Strategy & Transformation</CardTitle>
-              <CardDescription className="text-base">
-                Develop a comprehensive AI roadmap to transform your organization with intelligent solutions.
-              </CardDescription>
-            </CardHeader>
-            <CardContent className="flex-grow">
-              <ul className="space-y-2 mb-6">
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>AI Readiness Assessment</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>AI Strategy & Roadmap Development</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>Organizational Change Management</span>
-                </li>
-                <li className="flex items-start text-sm">
-                  <div className="mr-2 mt-1 text-primary flex-shrink-0"><ArrowRight className="h-3 w-3" /></div>
-                  <span>AI Center of Excellence Design</span>
-                </li>
-              </ul>
-            </CardContent>
-            <CardFooter className="pt-0">
-              <Button variant="outline" className="w-full" asChild>
-                <Link href="/case-studies/supply-chain-optimization">
                   Learn More <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
               </Button>

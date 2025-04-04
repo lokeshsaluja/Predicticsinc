@@ -392,13 +392,13 @@ export default function ContactPage() {
           <Card className="bg-gradient-to-br from-background to-primary/5 hover:shadow-md transition-all duration-300">
             <CardHeader className="pb-2">
               <CardTitle className="flex items-center text-lg">
-                <Building2 className="mr-3 h-5 w-5 text-primary" /> Headquarters
+                <Building2 className="mr-3 h-5 w-5 text-primary" /> Locations
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-base font-medium">New York, NY</p>
+              <p className="text-base font-medium">San Jose,CA & Toronto,CA</p>
               <p className="text-sm text-muted-foreground mt-2">
-                Main office location
+                Office locations
               </p>
             </CardContent>
           </Card>

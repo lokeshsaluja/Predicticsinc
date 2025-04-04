@@ -56,7 +56,7 @@ const imageMap: Record<ImageType, string> = {
   'industry': '/images/industry-solutions.jpg',
   'testimonial': '/images/ABInBev.jpg', // Updated testimonial image
   'case-study': '/images/case-study-healthcare.jpg',
-  'data-visualization': '/images/data-visualization.jpg',
+  'data-visualization': '/images/Reporting.jpg', // Updated data visualization image
   'healthcare': '/images/MaxHealth.png',
   'cpg': '/images/ABInBev.jpg',
   'electronics': '/images/Samsung.png', 
